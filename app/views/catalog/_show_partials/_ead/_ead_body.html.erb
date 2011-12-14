@@ -1,0 +1,10 @@
+<% xml = ead_xml(@document) %>
+
+
+      
+<% xml.xpath('/ead/archdesc/*[not(self::dsc)]').each do |node| %>    
+  <%= transform_ead_part(node) %>
+<% end -%>
+
+<%= render :partial => 'catalog/_show_partials/_ead/dsc',
+        :locals => {:element => xml.xpath('/ead/archdesc/dsc'), :start => 'c01'} %>

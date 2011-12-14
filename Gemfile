@@ -8,9 +8,13 @@ gem 'rails', '3.1.2'
 gem 'rsolr', '= 1.0.2'
 gem 'blacklight'
 gem 'therubyracer'
+gem 'nokogiri'
+
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'mongrel'
+  gem 'ruby-debug'
 end
 
 gem 'json'
@@ -21,6 +25,9 @@ group :assets do
   gem 'sass-rails',   '~> 3.1.5.rc.2'
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
+  gem 'compass', '~> 0.12.alpha'
+  # include other compass plugins here. E.g.:
+  gem 'compass-susy-plugin', :require => 'susy'
 end
 
 gem 'jquery-rails'

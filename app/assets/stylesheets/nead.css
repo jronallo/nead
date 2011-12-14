@@ -1,0 +1,35 @@
+.section{
+  clear: both;
+}
+
+.component_part {
+  margin-left: 20px;
+  padding: 5px;
+  border-bottom: 1px dotted black;
+}
+
+.container {
+  float: right;
+}
+
+.c01 {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+}
+
+.persname {
+  color:red;
+}
+
+.geogname {
+  color: green;
+}
+
+.corpname {
+  color: brown;
+}
+
+.controlaccess span {
+  display:block;
+}
