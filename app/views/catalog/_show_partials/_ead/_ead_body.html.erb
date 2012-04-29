@@ -1,10 +1,12 @@
 <% xml = ead_xml(@document) %>
 
-
+<h2 id="archdesc">Description of the Collection</h2>
       
-<% xml.xpath('/ead/archdesc/*[not(self::dsc)]').each do |node| %>    
+<% xml.xpath('/ead/archdesc/*[not(self::dsc)]').each do |node| %>
   <%= transform_ead_part(node) %>
 <% end -%>
+
+<h2 id="dsc">Collection Inventory</h2>
 
 <%= render :partial => 'catalog/_show_partials/_ead/dsc',
         :locals => {:element => xml.xpath('/ead/archdesc/dsc'), :start => 'c01'} %>

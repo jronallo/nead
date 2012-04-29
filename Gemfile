@@ -1,12 +1,12 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.2'
+gem 'rails', '~> 3.1'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'rsolr', '= 1.0.2'
-gem 'blacklight'
+gem 'rsolr', '~> 1.0.6'
+gem 'blacklight', '~> 3.4'
 gem 'therubyracer'
 gem 'nokogiri'
 
@@ -22,12 +22,9 @@ gem 'json'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.1.5.rc.2'
-  gem 'coffee-rails', '~> 3.1.1'
+  gem 'sass-rails',   '~> 3.2.0'
+  gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '>= 1.0.3'
-  gem 'compass', '~> 0.12.alpha'
-  # include other compass plugins here. E.g.:
-  gem 'compass-susy-plugin', :require => 'susy'
 end
 
 gem 'jquery-rails'
@@ -45,3 +42,5 @@ gem 'jquery-rails'
 # gem 'ruby-debug'
 
 gem "devise"
+gem "compass-rails", "~> 1.0.0", :group => :assets
+gem "compass-susy-plugin", "~> 0.9.0", :group => :assets

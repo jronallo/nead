@@ -9,6 +9,7 @@ module EadHelper
     'c' + start_number
   end
 
+  # used for table of contents
   def ead_xpaths
     [
       ['Archdesc', '/ead/archdesc', :text ],
@@ -47,6 +48,7 @@ module EadHelper
     end
   end
 
+  # to create table of contents
   def ead_contents(document)
     xml = ead_xml(document)
     xpaths = ead_xpaths
@@ -109,21 +111,29 @@ module EadHelper
   end
   
   def dsc_xslt
-    @xslt ||= Nokogiri::XSLT(File.read(File.join(Rails.root, 'lib', 'ead', 'xsl', 'nead.xsl')))
+    @dsc_xslt ||= Nokogiri::XSLT(File.read(File.join(Rails.root, 'lib', 'ead', 'xsl', 'nead_dsc.xsl')))
+  end
+  
+  def archdesc_xslt
+    @archdesc_xslt ||= Nokogiri::XSLT(File.read(File.join(Rails.root, 'lib', 'ead', 'xsl', 'nead_archdesc.xsl')))
   end
   
   def transform_ead_part(part)
-    doc = Nokogiri::XML(part.to_s)    
+    doc = Nokogiri::XML(part.to_s)
     if ['c','c01', 'c02', 'c03','c04','c05','c06','c07','c08','c09','c10','c11','c12'].include? doc.xpath('./*').first.name
       xpath = dsc_xpath
+      xslt = dsc_xslt
     else
       xpath = standard_xpath
-    end  
+      xslt = archdesc_xslt
+    end
     
     parts = Nokogiri::XML(doc.xpath(xpath).first.to_s)
-    xslt  = dsc_xslt
-    transformed_doc = xslt.transform(parts).to_s.sub('<?xml version="1.0"?>', '')
-    transformed_doc.html_safe
+    if !parts.blank?
+      Rails.logger.info(parts.to_s)
+      transformed_doc = xslt.transform(parts).to_s.sub('<?xml version="1.0"?>', '')
+      transformed_doc.html_safe
+    end
   end
   
 end

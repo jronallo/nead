@@ -7,8 +7,7 @@
     <%= transform_ead_part(component_part) %>
   </div>
   
-  <% start = ead_increment_start(start) -%>
   <%= render :partial => 'catalog/_show_partials/_ead/dsc',
-    :locals => {:element => component_part, :start => start} %>
+    :locals => {:element => component_part, :start => ead_increment_start(start)} %>
 </div>
 

@@ -48,7 +48,7 @@ namespace :solr do
   
   desc 'commit solr'
   task :commit => :environment do
-    pp Blacklight.solr.commit  
+    pp Blacklight.solr.commit
   end
   
 
@@ -57,24 +57,24 @@ namespace :solr do
     #ripped directly from Blacklight demo application
     desc "index a directory of ead files"
     task :ead_dir=>:environment do
-      input_file = ENV['FILE']
-      if input_file =~ /\*/
-        files = Dir[input_file].collect
+      input_directory = ENV['FILE']
+      if input_directory =~ /\*/
+        files = Dir[input_directory].collect
       else
-        files = [input_file]
+        files = Dir[File.join(input_directory,'*')].collect
       end
       files.each_with_index do |f,index|
         puts "indexing #{f}"
         ENV['FILE'] = f
         Rake::Task["solr:index:ead"].invoke
-        Rake::Task["solr:index:ead"].reenable        
+        Rake::Task["solr:index:ead"].reenable
       end
       pp Blacklight.solr.commit
     end
 
     desc "index ead sample data from NCSU"
     task :ead_sample_data => :environment do
-      ENV['FILE'] = "#{RAILS_ROOT}/vendor/plugins/blacklight_ext_ead_simple/data/*"
+      ENV['FILE'] = "#{Rails.root}/vendor/plugins/blacklight_ext_ead_simple/data/*"
       Rake::Task["solr:index:ead_dir"].invoke
     end
 
@@ -115,7 +115,7 @@ namespace :solr do
       solr_doc = {
         :format => 'ead',
         #:asset_type => 'Collection Guide',
-        :format_facet => 'EAD',       
+        :format_facet => 'EAD',
         :title_display => title,
         :institution_t => xml.at('//publicationstmt/publisher').text,
         #:language_facet => xml.at('//profiledesc/langusage/language').text.gsub(/\.$/, ''),

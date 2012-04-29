@@ -43,7 +43,9 @@ any introductory paragraphs.-->
     <xsl:apply-templates/>
   </xsl:template>
   
-  <xsl:template match="c02/scopecontent/head">
+  <xsl:template match="scopecontent/head | bioghist/head | arrangement/head |
+			userestrict/head | accessrestrict/head | processinfo/head |
+			acqinfo/head | custodhist/head | note/head">
     <h3><xsl:apply-templates/></h3>
   </xsl:template>
 
@@ -176,119 +178,7 @@ for each level.-->
 				</td>
 			</tr>
 		</xsl:for-each>
-	</xsl:template>
-
-
-	<!--This template creates a separate row for each child of
-		the listed elements.-->
-	<xsl:template match="c01/scopecontent | c01/bioghist | c01/arrangement
-			| c01/userestrict | c01/accessrestrict | c01/processinfo |
-			c01/acqinfo | c01/custodhist | c01/controlaccess/controlaccess |
-			c01/odd | c01/note | c01/descgrp/*">
-		<xsl:for-each select="head">
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td colspan="10">
-					<b>
-						<xsl:apply-templates/>
-					</b>
-				</td>
-			</tr>
-		</xsl:for-each>
-		<xsl:for-each select="*[not(self::head)]">
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td colspan="10">
-					<xsl:apply-templates/>
-				</td>
-			</tr>
-		</xsl:for-each>
-	</xsl:template>
-	
-
-	<!--This template processes c01 elements that have associated
-	containers, for example when c01 is a file. -->
-	<xsl:template name="c01-container">
-		<xsl:for-each select="did">
-			<tr>
-				<td valign="top">
-					<xsl:apply-templates select="container"/>
-				</td>
-				<td valign="top" colspan="11">
-					<xsl:call-template name="component-did"/>
-				</td>
-			</tr>
-			
-			<xsl:for-each select="abstract | note/p | langmaterial | materialspec">
-				<tr>
-					<td> </td>
-					<td> </td>
-					<td> </td>
-					<td colspan="9" valign="top">
-						<xsl:apply-templates/>
-					</td>
-				</tr>
-			</xsl:for-each>
-		</xsl:for-each>
-		<!--Closes the did.-->
-
-		<xsl:for-each select="scopecontent | bioghist | arrangement |
-			userestrict | accessrestrict | processinfo |
-			acqinfo | custodhist | controlaccess/controlaccess | odd | note | descgrp/*">
-			<xsl:for-each select="head">
-				<tr>
-					<td> </td>
-					<td> </td>
-					<td> </td>
-					<td colspan="9">
-						<b>
-							<xsl:apply-templates/>
-						</b>
-					</td>
-				</tr>
-			</xsl:for-each>
-			<xsl:for-each select="*[not(self::head)]">
-				<tr>
-					<td> </td>
-					<td> </td>
-					<td> </td>
-					<td colspan="9">
-						<xsl:apply-templates/>
-					</td>
-				</tr>
-			</xsl:for-each>
-		</xsl:for-each>
-		<xsl:apply-templates select="c02 | thead"/>
-	</xsl:template>
-
-
-	<!--This template processes c02 elements.-->
-	<xsl:template match="c02">
-		<xsl:apply-templates/>
-	</xsl:template>
-
-	<xsl:template match="c02/did">
-		<tr>
-			<td valign="top">
-				<xsl:apply-templates select="container"/>
-			</td>
-			<td valign="top" colspan="11">
-				<xsl:call-template name="component-did"/>
-			</td>
-		</tr>	
-		<xsl:for-each select="abstract | note/p | langmaterial | materialspec">
-			<tr>
-				<td> </td>
-				<td> </td>
-				<td> </td>
-				<td colspan="9" valign="top">
-					<xsl:apply-templates/>
-				</td>
-			</tr>
-		</xsl:for-each>
-	</xsl:template>
+	</xsl:template>	
 
 	<xsl:template match="c02/scopecontent | c02/bioghist | c02/arrangement |
 			c02/userestrict | c02/accessrestrict | c02/processinfo |

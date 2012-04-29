@@ -43,8 +43,7 @@ any introductory paragraphs.-->
     <xsl:apply-templates/>
   </xsl:template>
   
-  <xsl:template match="c02/scopecontent/head">
-    <h3><xsl:apply-templates/></h3>
+  <xsl:template match="scopecontent/head">
   </xsl:template>
 
 	<!-- ................Section 2 ...........................-->
